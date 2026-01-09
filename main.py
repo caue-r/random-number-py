@@ -1,10 +1,8 @@
 import time 
 import hashlib
 
-
 def jitter_random_256bits(iteracoes):
     b = time.perf_counter_ns()
-
     ruido = []
 
     for i in range(10000):
@@ -19,6 +17,7 @@ def jitter_random_256bits(iteracoes):
         # PCG 64-bit - 6364136223846793005 
         b = (b * 6364136223846793005 + deltaA + deltaC) & ((1 << 64) - 1)
         ruido.append(b)
+
     hash_hex = hashlib.sha256(str(ruido).encode()).hexdigest()
     return int(hash_hex, 16)
 
